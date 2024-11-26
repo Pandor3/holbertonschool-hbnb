@@ -22,15 +22,20 @@
 </header>
 <body>
     <main>
-        <!-- Add something to idfentify the place you're reviewing -->
+        <!-- Add something to identify the place you're reviewing -->
+        <h2>Add a Review</h2>
+        <label for="rating">Rating:</label>
+        <select id="rating" name="rating" required>
+            <option value="">Select Rating</option>
+            <option value="5">5 - Excellent</option>
+            <option value="4">4 - Very Good</option>
+            <option value="3">3 - Good</option>
+            <option value="2">2 - Fair</option>
+            <option value="1">1 - Poor</option>
+        </select>
         <form id="review-form">
-            <h2>Add a Review</h2>
             <label for="review">Your Review:</label>
             <textarea id="review" name="review" required></textarea>
-            <label for="rating">Rating:</label>
-            <select id="rating" name="rating" required>
-                <!-- Options for rating -->
-            </select>
             <button type="submit">Submit Review</button>
         </form>
     </main>

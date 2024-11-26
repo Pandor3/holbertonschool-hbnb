@@ -1,0 +1,10 @@
+CREATE TABLE Review 
+(
+    id CHAR(36) PRIMARY KEY,
+    text TEXT NOT NULL,
+    rating INT CHECK(rating BETWEEN 1 AND 5) NOT NULL,
+    user_id CHAR(36) NOT NULL,
+    place_id CHAR(36) NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES User(id) ON DELETE CASCADE,
+    FOREIGN KEY(place_id) REFERENCES Place(id) ON DELETE CASCADE,
+);
