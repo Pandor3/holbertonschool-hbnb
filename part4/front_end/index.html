@@ -23,9 +23,14 @@
     </header>
     <main>
         <section id="filter">
-            <label for="price-filter">Max Price:</label>
+            <label for="price-filter"><b>Filter by Price:</b></label>
             <select id="price-filter">
                 <!-- Options will be populated dynamically -->
+                 <option value="all">All</option>
+                 <option value="25">$25</option>
+                <option value="50">$50</option>
+                <option value="100">$100</option>
+                <option value="150">$150</option>
             </select>
         </section>
         
@@ -34,13 +39,13 @@
              <div class="place-card">
                 <h2>Simple Bungalow</h2>
                 <p>Price : $50</p>
-                <div class="details-button">View details</div>
+                <div class="details-button"><a href="place.html">View details</a></div>
              </div>
         </section>
     </main>
     <script src="scripts.js"></script>
 </body>
 <footer>
-    <small><p>2024, Holberton Coding School, all rights reserved</p></small>
+    <small><p>® 2024, Holberton Coding School, all rights reserved</p></small>
 </footer>
 </html>

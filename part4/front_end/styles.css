@@ -10,6 +10,27 @@
     font-family: Arial, sans-serif;
 }
 
+#login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 2px solid #060606;
+    border-radius: 10px;
+    background-color: #ede1e1;
+}
+
+#login-form label,
+#login-form input,
+#login-form button {
+    margin-bottom: 15px;
+}
+
 html, body {
     background-color: #ede1e1;
     color: #333;
@@ -51,6 +72,18 @@ main {
     flex: 1;
 }
 
+#filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#price-filter {
+    padding: 6px 12px;
+}
+
 .place-card {
     margin: 20px;
     padding: 10px;
@@ -72,5 +105,5 @@ footer {
     padding: 1rem;
     text-align: center;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
