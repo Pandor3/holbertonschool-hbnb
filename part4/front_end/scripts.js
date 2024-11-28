@@ -1,4 +1,4 @@
-// API routes via variables --------------------------------------------------------------------------//
+// API routes via variables ---------------------------------------------------------------------//
 const API_URL = "http://127.0.0.1:5000/api/v1/auth/login";
 const GET_ALL_PLACES = "http://127.0.0.1:5000/api/v1/places";
 const GET_PLACE ="http://127.0.0.1:5000/api/v1/places";
@@ -6,7 +6,7 @@ const POST_REVIEW = "http://127.0.0.1:5000/api/v1/reviews";
 const GET_REVIEW_BY_PLACE = "http://127.0.0.1:5000/api/v1/reviews/places";
 const GET_USER_BY_ID = "http://127.0.0.1:5000/api/v1/users";
 
-// HTML URLs via variables --------------------------------------------------------------------------//
+// HTML URLs via variables ----------------------------------------------------------------------//
 const URL_LOGIN = "http://127.0.0.1:5500/part4/front_end/login.html";
 const URL_INDEX = "http://127.0.0.1:5500/part4/front_end/index.html";
 const URL_PLACE = "http://127.0.0.1:5500/part4/front_end/place.html";
@@ -17,7 +17,7 @@ const INDEX = "index.html";
 const PLACE = "place.html";
 const REVIEW = "add_review.html";
 
-// AUTHENTICATION ----------------------------------------------------------------------------------// 
+// AUTHENTICATION -------------------------------------------------------------------------------// 
 // This function will inspect the cookie in order to see if the user is logged in or not //
 function getCookie(name) {
   const cookies = document.cookie.split(";");
@@ -40,7 +40,7 @@ function authenticationChecker() {
   } else {
     loginLink.style.display = "none";
   }
-  }
+}
 
   // This function will decode the JWT token in order to inspect the user ID //
   async function getUserId() {
@@ -103,6 +103,40 @@ function authenticationChecker() {
     }
   }
 
+  // INDEX SECTION ------------------------------------------------------------------------------//
+
+async function fetchPlaces() {
+  try {
+    const response = await fetch(GET_ALL_PLACES);
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP : ${response.status}`);
+    }
+    const places = await response.json();
+    displayPlaces(places);
+    return places;
+  } catch (error) {
+    console.error("Erreur de chargement des places :", error);
+  }
+}
+
+function displayPlaces(places) {
+  const placesList = document.getElementById('places-list');
+  placesList.innerHTML = '';
+  places.forEach(place => {
+    const placeElement = document.createElement("div");
+    placeElement.classList.add("card", "place-card");
+    placeElement.dataset.price = place.price;
+    placeElement.dataset.placeId = place.id;
+    placeElement.innerHTML = `
+    <h3 class="place-name">${place.title}</h3>
+    <p class="place-price">Price per night: $${place.price}</p>
+    <a href="place.html?place_id=${place.id}" class="button login-button">View Details</a>`;
+    placesList.appendChild(placeElement);
+  });
+  priceFilter();
+}
+
+  // --------------------------------------------------------------------------------------------//
 document.addEventListener('DOMContentLoaded', () => {
   authenticationChecker();
   const currentPage = window.location.pathname.split("/").pop();
