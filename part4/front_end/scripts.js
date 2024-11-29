@@ -103,8 +103,8 @@ function authenticationChecker() {
     }
   }
 
-  // INDEX SECTION ------------------------------------------------------------------------------//
-
+// INDEX SECTION ------------------------------------------------------------------------------//
+// This function will fetch the places //
 async function fetchPlaces() {
   try {
     const response = await fetch(GET_ALL_PLACES);
@@ -119,6 +119,12 @@ async function fetchPlaces() {
   }
 }
 
+// This function will be added in order to fetch the places once the index is loaded //
+function loadIndex() {
+  fetchPlaces();
+}
+
+// This function will display the places once they have been registered to the database //
 function displayPlaces(places) {
   const placesList = document.getElementById('places-list');
   placesList.innerHTML = '';
@@ -136,11 +142,35 @@ function displayPlaces(places) {
   priceFilter();
 }
 
+// This function will be used to filter the prices of the places on the index //
+function priceFilter() {
+  const priceSelect = document.getElementById('price-filter'); // récup filtre
+  const placeCards = document.querySelectorAll('.place-card'); // récup les cartes de lieux
+
+  priceSelect.addEventListener('change', (event) => {
+    const selectedPrice = parseInt(event.target.value);
+
+    placeCards.forEach(card => {
+      const placePrice = parseInt(card.dataset.price);
+
+      if (selectedPrice === 0 || placePrice <= selectedPrice) {
+        card.classList.remove('hidden');
+      } else { 
+        card.classList.add('hidden');
+      }
+    });
+  });
+}
+
   // --------------------------------------------------------------------------------------------//
+
 document.addEventListener('DOMContentLoaded', () => {
   authenticationChecker();
   const currentPage = window.location.pathname.split("/").pop();
   if (currentPage === LOGIN) {
     loadLogin();
+  }
+  if (currentPage === INDEX) {
+    loadIndex();
   }
   });
